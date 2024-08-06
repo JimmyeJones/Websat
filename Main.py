@@ -2,6 +2,7 @@ import streamlit as st
 from PIL import Image
 import requests
 from io import BytesIO
+import os
 
 # Base URL of the Flask server via ngrok or DDNS
 base_url = st.secrets["IP"]  # Keep the environment variable name the same
