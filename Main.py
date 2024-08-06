@@ -3,6 +3,7 @@ from PIL import Image
 import requests
 from io import BytesIO
 import os
+from datetime import datetime
 
 # IP of Flask server
 base_url = st.secrets["IP"]
@@ -46,7 +47,7 @@ for image_path in image_paths:
         if response.status_code == 200:
             image = Image.open(BytesIO(response.content))
             st.image(image, caption=image_path, use_column_width=True)
-            st.link_button("Download Full Resolution", full_url)
+            st.link_button("Download Full Resolution", f"<a href={full_url} download>Download Image</a>")
         
         else:
             st.write(f"Error loading preview: {response.status_code}")
