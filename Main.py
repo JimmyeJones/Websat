@@ -32,14 +32,17 @@ st.write(f"Found {len(image_paths)} images.")
 # Display images
 for image_path in image_paths:
     st.write(f"Image: {image_path}")
-    image_url = f"{base_url}/image/{image_path}"
-    st.write(f"Image URL: {image_url}")
+    preview_url = f"{base_url}/preview/{image_path}"
+    full_url = f"{base_url}/image/{image_path}"
+    st.write(f"Preview URL: {preview_url}")
+    st.write(f"Full Resolution URL: {full_url}")
     try:
-        response = requests.get(image_url)
+        response = requests.get(preview_url)
         if response.status_code == 200:
             image = Image.open(BytesIO(response.content))
             st.image(image, caption=image_path)
+            st.write(f"[Download Full Resolution]({full_url})")
         else:
-            st.write(f"Error loading image: {response.status_code}")
+            st.write(f"Error loading preview: {response.status_code}")
     except Exception as e:
-        st.write(f"Exception loading image: {e}")
+        st.write(f"Exception loading preview: {e}")
