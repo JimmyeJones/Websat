@@ -8,7 +8,7 @@ import os
 base_url = st.secrets["IP"]
 
 st.title("WebSat")
-st.subheader("Satellite reception site")
+st.write("Satellite reception site")
 
 # Function to get all image paths
 def get_image_paths():
