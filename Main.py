@@ -39,7 +39,7 @@ st.write(f"Found {len(image_paths)} images.")
 # Display images
 images_shown = 0
 for image_path in image_paths:
-    if images_shown >= 50:
+    if images_shown >= load_limit:
         break
     st.write(f"Image: {image_path}")
     preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
