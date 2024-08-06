@@ -32,29 +32,27 @@ image_paths = get_image_paths()
 def get_subfolders(path, all_paths):
     subfolders = list(set([os.path.join(*p.split(os.path.sep)[:len(path.split(os.path.sep))+1]) 
                            for p in all_paths if p.startswith(path)]))
+    subfolders = [os.path.basename(subfolder) for subfolder in subfolders if subfolder != path]
     subfolders.sort()
     return subfolders
 
 # Sidebar for folder selection
 selected_folder = ""
-folders = get_subfolders(selected_folder, image_paths)
-selected_main_folder = st.sidebar.selectbox("Select Main Folder", [""] + folders)
+all_selected_folders = []
 
-if selected_main_folder:
-    selected_folder = selected_main_folder
+while True:
     folders = get_subfolders(selected_folder, image_paths)
-    selected_sub_folder = st.sidebar.selectbox("Select Sub Folder", [""] + folders)
-    
-    if selected_sub_folder:
-        selected_folder = selected_sub_folder
-        folders = get_subfolders(selected_folder, image_paths)
-        selected_sub_sub_folder = st.sidebar.selectbox("Select Sub-Sub Folder", [""] + folders)
-        
-        if selected_sub_sub_folder:
-            selected_folder = selected_sub_sub_folder
+    if not folders:
+        break
+    selected_sub_folder = st.sidebar.selectbox(f"Select Folder at {selected_folder}", [""] + folders, key=selected_folder)
+    if selected_sub_folder == "":
+        break
+    selected_folder = os.path.join(selected_folder, selected_sub_folder)
+    all_selected_folders.append(selected_folder)
 
 # Filter images by selected folder
-if selected_folder:
+if all_selected_folders:
+    selected_folder = os.path.join(*all_selected_folders)
     image_paths = [path for path in image_paths if path.startswith(selected_folder)]
 
 st.write(f"Found {len(image_paths)} images.")
@@ -62,7 +60,7 @@ st.write(f"Found {len(image_paths)} images.")
 # Display images
 for image_path in image_paths:
     st.write(f"Image: {image_path}")
-    preview_url = f"{base_url}/preview/{image_path}"
+    preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
     full_url = f"{base_url}/image/{image_path}"
     st.write(f"Preview URL: {preview_url}")
     st.write(f"Full Resolution URL: {full_url}")
@@ -70,7 +68,7 @@ for image_path in image_paths:
         response = requests.get(preview_url)
         if response.status_code == 200:
             image = Image.open(BytesIO(response.content))
-            st.image(image, caption=image_path)
+            st.image(image, caption=image_path, use_column_width=True)
             st.write(f"[Download Full Resolution]({full_url})")
         else:
             st.write(f"Error loading preview: {response.status_code}")
