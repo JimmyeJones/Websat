@@ -9,8 +9,6 @@ base_url = st.secrets["IP"]  # Keep the environment variable name the same
 
 st.title("GOES 16 Image Viewer")
 
-st.write(f"Using Flask server at: {base_url}")
-
 # Function to get all image paths
 def get_image_paths():
     try:
