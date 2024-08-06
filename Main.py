@@ -51,27 +51,21 @@ for image_path in image_paths:
 
             # Fetch the image
             response = requests.get(image_url)
-
-            # Ensure the request was successful
-            if response.status_code == 200:
-                # Get the current time
-                now = datetime.now()
-                timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")
+            # Get the current time
+            now = datetime.now()
+            timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")
+            # Extract file extension from the image URL
+            file_extension = image_url.split('.')[-1]
     
-                # Extract file extension from the image URL
-                file_extension = image_url.split('.')[-1]
-    
-                # Create a filename with the current timestamp
-                file_name = f"image_{timestamp}.{file_extension}"
+            # Create a filename with the current timestamp
+            file_name = f"image_{timestamp}.{file_extension}"
 
-                st.download_button(
-                    label="Download Full Resolution",
-                    data=response.content,
-                    file_name=file_name,
-                    mime=f"image/{file_extension}"
-                )
-            else:
-                st.error("Failed to fetch the image.")
+            st.download_button(
+                label="Download Full Resolution",
+                data=response.content,
+                file_name=file_name,
+                mime=f"image/{file_extension}"
+            )
         
         else:
             st.write(f"Error loading preview: {response.status_code}")
