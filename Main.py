@@ -3,8 +3,8 @@ from PIL import Image
 import requests
 from io import BytesIO
 
-# Base URL of the Flask server via ngrok
-base_url = st.secrets["IP"]  # Replace with your ngrok URL
+# Base URL of the Flask server via ngrok or DDNS
+base_url = st.secrets["IP"]  # Keep the environment variable name the same
 
 st.title("GOES 16 Image Viewer")
 
@@ -26,6 +26,17 @@ def get_image_paths():
 
 # Get the list of image paths
 image_paths = get_image_paths()
+
+# Extract unique folder names for filtering
+folders = list(set([os.path.dirname(path) for path in image_paths]))
+folders.sort()
+
+# Sidebar for folder selection
+selected_folder = st.sidebar.selectbox("Select Folder", ["All"] + folders)
+
+# Filter images by selected folder
+if selected_folder != "All":
+    image_paths = [path for path in image_paths if path.startswith(selected_folder)]
 
 st.write(f"Found {len(image_paths)} images.")
 
