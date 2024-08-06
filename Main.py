@@ -49,6 +49,7 @@ for image_path in image_paths:
             st.image(image, caption=image_path, use_column_width=True)
             image_url = full_url
 
+            # Get the current time for the file name
             now = datetime.now()
             timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")
 
@@ -58,8 +59,11 @@ for image_path in image_paths:
             # Create a filename with the current timestamp
             file_name = f"image_{timestamp}.{file_extension}"
 
+            # Create a download URL with a query parameter to trigger download
+            download_url = f"{image_url}?download={file_name}"
+
             st.markdown(
-                f'<a href="{image_url}" download="{file_name}" style="text-decoration: none; color: inherit;">Download Image</a>',
+                f'<a href="{download_url}" download="{file_name}" style="text-decoration: none; color: inherit;">Download Image</a>',
                 unsafe_allow_html=True
             )
         
