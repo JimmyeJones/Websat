@@ -28,15 +28,33 @@ def get_image_paths():
 # Get the list of image paths
 image_paths = get_image_paths()
 
-# Extract unique folder names for filtering
-folders = list(set([os.path.dirname(path) for path in image_paths]))
-folders.sort()
+# Function to get subfolders at a given path
+def get_subfolders(path, all_paths):
+    subfolders = list(set([os.path.join(*p.split(os.path.sep)[:len(path.split(os.path.sep))+1]) 
+                           for p in all_paths if p.startswith(path)]))
+    subfolders.sort()
+    return subfolders
 
 # Sidebar for folder selection
-selected_folder = st.sidebar.selectbox("Select Folder", ["All"] + folders)
+selected_folder = ""
+folders = get_subfolders(selected_folder, image_paths)
+selected_main_folder = st.sidebar.selectbox("Select Main Folder", [""] + folders)
+
+if selected_main_folder:
+    selected_folder = selected_main_folder
+    folders = get_subfolders(selected_folder, image_paths)
+    selected_sub_folder = st.sidebar.selectbox("Select Sub Folder", [""] + folders)
+    
+    if selected_sub_folder:
+        selected_folder = selected_sub_folder
+        folders = get_subfolders(selected_folder, image_paths)
+        selected_sub_sub_folder = st.sidebar.selectbox("Select Sub-Sub Folder", [""] + folders)
+        
+        if selected_sub_sub_folder:
+            selected_folder = selected_sub_sub_folder
 
 # Filter images by selected folder
-if selected_folder != "All":
+if selected_folder:
     image_paths = [path for path in image_paths if path.startswith(selected_folder)]
 
 st.write(f"Found {len(image_paths)} images.")
