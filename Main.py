@@ -36,7 +36,10 @@ st.write(f"Found {len(image_paths)} images.")
 
 
 # Display images
+images_shown = 0
 for image_path in image_paths:
+    if images_shown >= 100:
+        break
     st.write(f"Image: {image_path}")
     preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
     full_url = f"{base_url}/image/{image_path}"
@@ -48,24 +51,8 @@ for image_path in image_paths:
             image = Image.open(BytesIO(response.content))
             st.image(image, caption=image_path, use_column_width=True)
             image_url = full_url
-
-            # Get the current time for the file name
-            now = datetime.now()
-            timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")
-
-            # Extract file extension from the image URL
-            file_extension = image_url.split('.')[-1]
-
-            # Create a filename with the current timestamp
-            file_name = f"image_{timestamp}.{file_extension}"
-
-            # Create a download URL with a query parameter to trigger download
-            download_url = f"{image_url}?download={file_name}"
-
-            st.markdown(
-                f'<a href="{download_url}" download="{file_name}" style="text-decoration: none; color: inherit;">Download Image</a>',
-                unsafe_allow_html=True
-            )
+            images_shown += 1
+            
         
         else:
             st.write(f"Error loading preview: {response.status_code}")
