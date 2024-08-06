@@ -67,7 +67,7 @@ for image_path in image_paths:
         if response.status_code == 200:
             image = Image.open(BytesIO(response.content))
             st.image(image, caption=image_path, use_column_width=True)
-            st.write(f"[Download Full Resolution]({full_url})")
+            st.button(f"[Download Full Resolution]({full_url})")
         else:
             st.write(f"Error loading preview: {response.status_code}")
     except Exception as e:
