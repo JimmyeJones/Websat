@@ -49,22 +49,18 @@ for image_path in image_paths:
             st.image(image, caption=image_path, use_column_width=True)
             image_url = full_url
 
-            # Fetch the image
-            response = requests.get(image_url)
-            # Get the current time
             now = datetime.now()
             timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")
+
             # Extract file extension from the image URL
             file_extension = image_url.split('.')[-1]
-    
+
             # Create a filename with the current timestamp
             file_name = f"image_{timestamp}.{file_extension}"
 
-            st.download_button(
-                label="Download Full Resolution",
-                data=response.content,
-                file_name=file_name,
-                mime=f"image/{file_extension}"
+            st.markdown(
+                f'<a href="{image_url}" download="{file_name}" style="text-decoration: none; color: inherit;">Download Image</a>',
+                unsafe_allow_html=True
             )
         
         else:
