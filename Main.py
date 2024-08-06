@@ -4,7 +4,7 @@ import requests
 from io import BytesIO
 
 # Base URL of the Flask server via ngrok
-base_url = "https://d124-24-149-99-6.ngrok-free.app/images"  # Replace with your ngrok URL
+base_url = "https://d124-24-149-99-6.ngrok-free.app"  # Replace with your ngrok URL
 
 st.title("GOES 16 Image Viewer")
 
