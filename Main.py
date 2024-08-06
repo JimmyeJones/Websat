@@ -47,7 +47,31 @@ for image_path in image_paths:
         if response.status_code == 200:
             image = Image.open(BytesIO(response.content))
             st.image(image, caption=image_path, use_column_width=True)
-            st.link_button("Download Full Resolution", "http://24.149.99.6:5000/image/2024-08-06_01-54_goes_hrit_1.6941%20GHz/IMAGES/GOES-16/Full%20Disk/2024-08-06_01-30-20/abi_rgb_Dirty_Longwave_Window_-_CIRA_map.jpg?download")
+            image_url = full_url
+
+            # Fetch the image
+            response = requests.get(image_url)
+
+            # Ensure the request was successful
+            if response.status_code == 200:
+                # Get the current time
+                now = datetime.now()
+                timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")
+    
+                # Extract file extension from the image URL
+                file_extension = image_url.split('.')[-1]
+    
+                # Create a filename with the current timestamp
+                file_name = f"image_{timestamp}.{file_extension}"
+
+                st.download_button(
+                    label="Download Full Resolution",
+                    data=response.content,
+                    file_name=file_name,
+                    mime=f"image/{file_extension}"
+                )
+            else:
+                st.error("Failed to fetch the image.")
         
         else:
             st.write(f"Error loading preview: {response.status_code}")
