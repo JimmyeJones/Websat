@@ -47,7 +47,7 @@ for image_path in image_paths:
         if response.status_code == 200:
             image = Image.open(BytesIO(response.content))
             st.image(image, caption=image_path, use_column_width=True)
-            st.link_button("Download Full Resolution", f"<a href={full_url} download>Download Image</a>")
+            st.link_button("Download Full Resolution", "http://24.149.99.6:5000/image/2024-08-06_01-54_goes_hrit_1.6941%20GHz/IMAGES/GOES-16/Full%20Disk/2024-08-06_01-30-20/abi_rgb_Dirty_Longwave_Window_-_CIRA_map.jpg?download")
         
         else:
             st.write(f"Error loading preview: {response.status_code}")
