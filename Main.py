@@ -4,39 +4,42 @@ import requests
 from io import BytesIO
 
 # Base URL of the Flask server via ngrok
-base_url = "https://d124-24-149-99-6.ngrok-free.app"  # Replace with your ngrok URL
+base_url = "http://abcd1234.ngrok.io"  # Replace with your ngrok URL
+
+st.title("GOES 16 Image Viewer")
+
+st.write(f"Using Flask server at: {base_url}")
 
 # Function to get all image paths
 def get_image_paths():
-    response = requests.get(f"{base_url}/images")
-    if response.status_code == 200:
-        return response.json()
-    else:
+    try:
+        response = requests.get(f"{base_url}/images")
+        st.write(f"Response status code: {response.status_code}")
+        if response.status_code == 200:
+            return response.json()
+        else:
+            st.write(f"Error: {response.text}")
+            return []
+    except Exception as e:
+        st.write(f"Exception: {e}")
         return []
-
-# Function to load an image from a URL
-def load_image(url):
-    response = requests.get(url)
-    if response.status_code == 200:
-        return Image.open(BytesIO(response.content))
-    else:
-        return None
-
-# Streamlit App
-st.title("GOES 16 Image Viewer")
 
 # Get the list of image paths
 image_paths = get_image_paths()
 
-# Create a sidebar for folder selection
-folder = st.sidebar.selectbox("Select Folder", list(set(os.path.dirname(path) for path in image_paths)))
-
-# Filter images by selected folder
-folder_images = [path for path in image_paths if path.startswith(folder)]
+st.write(f"Found {len(image_paths)} images.")
 
 # Display images
-for image_path in folder_images:
-    st.write(f"Image: {os.path.basename(image_path)}")
-    image = load_image(f"{base_url}/image/{image_path}")
-    if image:
-        st.image(image, caption=os.path.basename(image_path))
+for image_path in image_paths:
+    st.write(f"Image: {image_path}")
+    image_url = f"{base_url}/image/{image_path}"
+    st.write(f"Image URL: {image_url}")
+    try:
+        response = requests.get(image_url)
+        if response.status_code == 200:
+            image = Image.open(BytesIO(response.content))
+            st.image(image, caption=image_path)
+        else:
+            st.write(f"Error loading image: {response.status_code}")
+    except Exception as e:
+        st.write(f"Exception loading image: {e}")
