@@ -11,6 +11,7 @@ base_url = st.secrets["IP"]
 st.title("WebSat")
 st.text("Satellite reception site")
 
+load_limit = st.slider("Number of Images to load", 0, 50, 5)
 # Function to get all image paths
 def get_image_paths():
     try:
