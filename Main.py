@@ -15,7 +15,7 @@ load_limit = st.slider("Number of Images to load", 0, 50, 5, 5)
 
 #Sidebar
 
-req_1 = st.sidebar.selectbox("Select Satellite/Source", ["GOES-16", "GOES-18", "NWS", "Unknown"]
+req_1 = st.sidebar.selectbox("Select Satellite/Source", ["GOES-16", "GOES-18", "NWS", "Unknown"])
     
 
 # Function to get all image paths
