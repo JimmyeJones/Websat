@@ -16,7 +16,7 @@ load_limit = st.slider("Number of Images to load", 0, 50, 5, 5)
 #Sidebar
 
 req_1 = st.sidebar.selectbox("Select Satellite/Source", ["GOES-16", "GOES-18", "NWS", "Unknown"])
-    
+req_2 = st.sidebar.selectbox("Image Size", ["", "Full Disk", "Mesoscale 1", "Mesoscale 2"])    
 
 # Function to get all image paths
 def get_image_paths():
@@ -37,7 +37,7 @@ all_image_paths = get_image_paths()
 
 image_paths = []
 for path in all_image_paths:
-    if req_1 in path:
+    if req_1 in path and req_2 in path:
         image_paths.append(path)
 
 st.write(f"Found {len(image_paths)} images.")
