@@ -37,7 +37,7 @@ all_image_paths = get_image_paths()
 
 image_paths = []
 for path in all_image_paths:
-    if req_1 in path and req_2 in path:
+    if req_1, req_2 in path:
         image_paths.append(path)
 
 st.write(f"Found {len(image_paths)} images.")
