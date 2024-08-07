@@ -15,9 +15,9 @@ load_limit = st.slider("Number of Images to load", 0, 50, 5, 5)
 
 #Sidebar
 
-req_1 = st.sidebar.selectbox("Select Satellite/Source", ["GOES-16", "GOES-18", "NWS", "Unknown"])
+req_1 = st.sidebar.selectbox("Satellite/Source", ["GOES-16", "GOES-18", "NWS", "Unknown"])
 req_2 = st.sidebar.selectbox("Image Size", ["", "Full Disk", "Mesoscale 1", "Mesoscale 2"])    
-
+req_3 = st.sidebar.selectbox("Channel", ["", "_Clean_Longwave_IR_Window"])
 # Function to get all image paths
 def get_image_paths():
     try:
