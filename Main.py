@@ -33,19 +33,21 @@ def get_image_paths():
 
 # Function to extract datetime from path
 def extract_datetime_from_path(path):
-    # Assuming the date and time are embedded in the file path, e.g., "/path/to/image/2024-08-06_01-54/image.jpg"
     try:
         date_str = path.split('/')[-2]
         return datetime.strptime(date_str, "%Y-%m-%d_%H-%M-%S")
-    except Exception as e:
-        st.write(f"Error extracting datetime from path: {e}")
+    except ValueError:
         return None
 
 # Get the list of image paths
 all_image_paths = get_image_paths()
 
 # Sort image paths by datetime
-sorted_image_paths = sorted(all_image_paths, key=lambda x: extract_datetime_from_path(x), reverse=True)
+sorted_image_paths = sorted(
+    [path for path in all_image_paths if extract_datetime_from_path(path) is not None],
+    key=lambda x: extract_datetime_from_path(x),
+    reverse=True
+)
 
 # Filter image paths based on criteria
 filtered_image_paths = [path for path in sorted_image_paths if req_1 in path and req_2 in path and req_3 in path]
@@ -72,4 +74,3 @@ for image_path in filtered_image_paths:
             st.write(f"Error loading preview: {response.status_code}")
     except Exception as e:
         st.write(f"Exception loading preview: {e}")
-
