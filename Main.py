@@ -2,7 +2,6 @@ import streamlit as st
 from PIL import Image
 import requests
 from io import BytesIO
-import os
 from datetime import datetime
 
 # IP of Flask server
@@ -13,11 +12,11 @@ st.text("Satellite reception site")
 
 load_limit = st.slider("Number of Images to load", 0, 50, 5, 5)
 
-#Sidebar
-
+# Sidebar
 req_1 = st.sidebar.selectbox("Satellite/Source", ["GOES-16", "GOES-18", "NWS", "Unknown"])
-req_2 = st.sidebar.selectbox("Image Size", ["", "Full Disk", "Mesoscale 1", "Mesoscale 2"])    
+req_2 = st.sidebar.selectbox("Image Size", ["", "Full Disk", "Mesoscale 1", "Mesoscale 2"])
 req_3 = st.sidebar.selectbox("Channel", ["", "_Clean_Longwave_IR_Window"])
+
 # Function to get all image paths
 def get_image_paths():
     try:
@@ -32,22 +31,33 @@ def get_image_paths():
         st.write(f"Exception: {e}")
         return []
 
+# Function to extract datetime from path
+def extract_datetime_from_path(path):
+    # Assuming the date and time are embedded in the file path, e.g., "/path/to/image/2024-08-06_01-54/image.jpg"
+    try:
+        date_str = path.split('/')[-2]
+        return datetime.strptime(date_str, "%Y-%m-%d_%H-%M-%S")
+    except Exception as e:
+        st.write(f"Error extracting datetime from path: {e}")
+        return None
+
 # Get the list of image paths
 all_image_paths = get_image_paths()
 
-image_paths = []
+# Filter and sort image paths
+filtered_image_paths = []
 for path in all_image_paths:
-    if req_1, req_2 in path:
-        image_paths.append(path)
+    if req_1 in path and req_2 in path and req_3 in path:
+        filtered_image_paths.append(path)
 
-st.write(f"Found {len(image_paths)} images.")
+# Sort images by datetime
+filtered_image_paths = sorted(filtered_image_paths, key=lambda x: extract_datetime_from_path(x), reverse=True)
 
-
-
+st.write(f"Found {len(filtered_image_paths)} images.")
 
 # Display images
 images_shown = 0
-for image_path in image_paths:
+for image_path in filtered_image_paths:
     if images_shown >= load_limit:
         break
     st.write(f"Image: {image_path}")
@@ -60,10 +70,7 @@ for image_path in image_paths:
         if response.status_code == 200:
             image = Image.open(BytesIO(response.content))
             st.image(image, caption=image_path, use_column_width=True)
-            image_url = full_url
             images_shown += 1
-            
-        
         else:
             st.write(f"Error loading preview: {response.status_code}")
     except Exception as e:
