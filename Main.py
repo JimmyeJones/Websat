@@ -46,11 +46,14 @@ all_image_paths = get_image_paths()
 paths_with_dates = [path for path in all_image_paths if extract_datetime_from_path(path) is not None]
 paths_without_dates = [path for path in all_image_paths if extract_datetime_from_path(path) is None]
 
-# Sort paths with valid dates
+# Sort paths with valid dates by datetime
 sorted_paths_with_dates = sorted(paths_with_dates, key=lambda x: extract_datetime_from_path(x), reverse=True)
 
-# Combine sorted paths with dates and paths without dates
-sorted_image_paths = sorted_paths_with_dates + paths_without_dates
+# Sort paths without valid dates alphabetically
+sorted_paths_without_dates = sorted(paths_without_dates)
+
+# Combine sorted paths with dates and sorted paths without dates
+sorted_image_paths = sorted_paths_with_dates + sorted_paths_without_dates
 
 # Filter image paths based on criteria
 filtered_image_paths = [path for path in sorted_image_paths if req_1 in path and req_2 in path and req_3 in path]
