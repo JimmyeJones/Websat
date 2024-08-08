@@ -44,14 +44,11 @@ def extract_datetime_from_path(path):
 # Get the list of image paths
 all_image_paths = get_image_paths()
 
-# Filter and sort image paths
-filtered_image_paths = []
-for path in all_image_paths:
-    if req_1 in path and req_2 in path and req_3 in path:
-        filtered_image_paths.append(path)
+# Sort image paths by datetime
+sorted_image_paths = sorted(all_image_paths, key=lambda x: extract_datetime_from_path(x), reverse=True)
 
-# Sort images by datetime
-filtered_image_paths = sorted(filtered_image_paths, key=lambda x: extract_datetime_from_path(x), reverse=True)
+# Filter image paths based on criteria
+filtered_image_paths = [path for path in sorted_image_paths if req_1 in path and req_2 in path and req_3 in path]
 
 st.write(f"Found {len(filtered_image_paths)} images.")
 
@@ -75,3 +72,4 @@ for image_path in filtered_image_paths:
             st.write(f"Error loading preview: {response.status_code}")
     except Exception as e:
         st.write(f"Exception loading preview: {e}")
+
