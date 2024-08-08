@@ -42,12 +42,15 @@ def extract_datetime_from_path(path):
 # Get the list of image paths
 all_image_paths = get_image_paths()
 
-# Sort image paths by datetime
-sorted_image_paths = sorted(
-    [path for path in all_image_paths if extract_datetime_from_path(path) is not None],
-    key=lambda x: extract_datetime_from_path(x),
-    reverse=True
-)
+# Separate paths with valid dates and those without
+paths_with_dates = [path for path in all_image_paths if extract_datetime_from_path(path) is not None]
+paths_without_dates = [path for path in all_image_paths if extract_datetime_from_path(path) is None]
+
+# Sort paths with valid dates
+sorted_paths_with_dates = sorted(paths_with_dates, key=lambda x: extract_datetime_from_path(x), reverse=True)
+
+# Combine sorted paths with dates and paths without dates
+sorted_image_paths = sorted_paths_with_dates + paths_without_dates
 
 # Filter image paths based on criteria
 filtered_image_paths = [path for path in sorted_image_paths if req_1 in path and req_2 in path and req_3 in path]
