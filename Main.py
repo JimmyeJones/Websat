@@ -12,14 +12,11 @@ st.text("Satellite reception site")
 
 load_limit = st.slider("Number of Images to load", 0, 50, 5, 5)
 
-
 # Sidebar
 req_1 = st.sidebar.selectbox("Satellite/Source", ["GOES-16", "GOES-18", "NWS", "Unknown"])
 req_2 = st.sidebar.selectbox("Image Size", ["", "Full Disk", "Mesoscale 1", "Mesoscale 2"])
 req_3 = st.sidebar.selectbox("Channel", ["", "_Clean_Longwave_IR_Window", "Dirty_Longwave_Window", "Dirty_Longwave_Window_-_CIRA", "GEO_False_Color", "Infrared_Longwave_Window_Band", "Mid-level_Tropospheric_Water_Vapor", "Shortwave_Window_Band", "Upper-Level_Tropospheric_Water_Vapor", "G16_2", "G16_7", "G16_8", "G16_9", "G16_13", "G16_14", "G16_15"])
 req_4 = st.sidebar.selectbox("Overlay", ["", "_map"])
-
-
 
 # Function to get all image paths
 def get_image_paths():
@@ -59,9 +56,6 @@ sorted_paths_without_dates = sorted(paths_without_dates)
 # Combine sorted paths with dates and sorted paths without dates
 sorted_image_paths = sorted_paths_with_dates + sorted_paths_without_dates
 
-
-
-
 # Filter image paths based on criteria
 filtered_image_paths = []
 for path in sorted_image_paths:
@@ -91,6 +85,13 @@ for image_path in filtered_image_paths:
             image = Image.open(BytesIO(response.content))
             st.image(image, caption=image_path, use_column_width=True)
             images_shown += 1
+            if st.button(f"Load Download Button for {image_path}"):
+                st.download_button(
+                    label="Download Full Resolution",
+                    data=requests.get(full_url).content,
+                    file_name=image_path.split("/")[-1],
+                    mime='image/jpeg'
+                )
         else:
             st.write(f"Error loading preview: {response.status_code}")
     except Exception as e:
