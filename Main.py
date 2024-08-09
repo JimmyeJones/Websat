@@ -18,6 +18,10 @@ req_2 = st.sidebar.selectbox("Image Size", ["", "Full Disk", "Mesoscale 1", "Mes
 req_3 = st.sidebar.selectbox("Channel", ["", "_Clean_Longwave_IR_Window", "Dirty_Longwave_Window", "Dirty_Longwave_Window_-_CIRA", "GEO_False_Color", "Infrared_Longwave_Window_Band", "Mid-level_Tropospheric_Water_Vapor", "Shortwave_Window_Band", "Upper-Level_Tropospheric_Water_Vapor", "G16_2", "G16_7", "G16_8", "G16_9", "G16_13", "G16_14", "G16_15"])
 req_4 = st.sidebar.selectbox("Overlay", ["", "_map"])
 
+# Initialize session state for images
+if 'images' not in st.session_state:
+    st.session_state.images = []
+
 # Function to get all image paths
 def get_image_paths():
     try:
@@ -40,33 +44,39 @@ def extract_datetime_from_path(path):
     except ValueError:
         return None
 
-# Get the list of image paths
-all_image_paths = get_image_paths()
+# Get the list of image paths only if not already loaded
+if not st.session_state.images:
+    all_image_paths = get_image_paths()
 
-# Separate paths with valid dates and those without
-paths_with_dates = [path for path in all_image_paths if extract_datetime_from_path(path) is not None]
-paths_without_dates = [path for path in all_image_paths if extract_datetime_from_path(path) is None]
+    # Separate paths with valid dates and those without
+    paths_with_dates = [path for path in all_image_paths if extract_datetime_from_path(path) is not None]
+    paths_without_dates = [path for path in all_image_paths if extract_datetime_from_path(path) is None]
 
-# Sort paths with valid dates by datetime
-sorted_paths_with_dates = sorted(paths_with_dates, key=lambda x: extract_datetime_from_path(x), reverse=True)
+    # Sort paths with valid dates by datetime
+    sorted_paths_with_dates = sorted(paths_with_dates, key=lambda x: extract_datetime_from_path(x), reverse=True)
 
-# Sort paths without valid dates alphabetically
-sorted_paths_without_dates = sorted(paths_without_dates)
+    # Sort paths without valid dates alphabetically
+    sorted_paths_without_dates = sorted(paths_without_dates)
 
-# Combine sorted paths with dates and sorted paths without dates
-sorted_image_paths = sorted_paths_with_dates + sorted_paths_without_dates
+    # Combine sorted paths with dates and sorted paths without dates
+    sorted_image_paths = sorted_paths_with_dates + sorted_paths_without_dates
 
-# Filter image paths based on criteria
-filtered_image_paths = []
-for path in sorted_image_paths:
-    if req_1 in path:
-        if req_2 in path:
-            if req_3 in path:
-                if req_4 == "":
-                    if "_map" not in path:
+    # Filter image paths based on criteria
+    filtered_image_paths = []
+    for path in sorted_image_paths:
+        if req_1 in path:
+            if req_2 in path:
+                if req_3 in path:
+                    if req_4 == "":
+                        if "_map" not in path:
+                            filtered_image_paths.append(path)
+                    elif req_4 in path:
                         filtered_image_paths.append(path)
-                elif req_4 in path:
-                    filtered_image_paths.append(path)
+
+    st.session_state.images = filtered_image_paths
+else:
+    filtered_image_paths = st.session_state.images
+
 st.write(f"Found {len(filtered_image_paths)} images.")
 
 # Display images
@@ -85,7 +95,9 @@ for image_path in filtered_image_paths:
             image = Image.open(BytesIO(response.content))
             st.image(image, caption=image_path, use_column_width=True)
             images_shown += 1
-            if st.button(f"Load Download Button for {image_path}"):
+
+            # Button to load download button
+            if st.button(f"Load Download Button for {image_path}", key=f"button_{image_path}"):
                 st.download_button(
                     label="Download Full Resolution",
                     data=requests.get(full_url).content,
