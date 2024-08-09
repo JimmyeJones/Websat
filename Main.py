@@ -84,11 +84,8 @@ images_shown = 0
 for image_path in filtered_image_paths:
     if images_shown >= load_limit:
         break
-    st.write(f"Image: {image_path}")
     preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
     full_url = f"{base_url}/image/{image_path}"
-    st.write(f"Preview URL: {preview_url}")
-    st.write(f"Full Resolution URL: {full_url}")
     try:
         response = requests.get(preview_url)
         if response.status_code == 200:
