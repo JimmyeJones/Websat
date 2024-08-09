@@ -18,9 +18,11 @@ req_2 = st.sidebar.selectbox("Image Size", ["", "Full Disk", "Mesoscale 1", "Mes
 req_3 = st.sidebar.selectbox("Channel", ["", "_Clean_Longwave_IR_Window", "Dirty_Longwave_Window", "Dirty_Longwave_Window_-_CIRA", "GEO_False_Color", "Infrared_Longwave_Window_Band", "Mid-level_Tropospheric_Water_Vapor", "Shortwave_Window_Band", "Upper-Level_Tropospheric_Water_Vapor", "G16_2", "G16_7", "G16_8", "G16_9", "G16_13", "G16_14", "G16_15"])
 req_4 = st.sidebar.selectbox("Overlay", ["", "_map"])
 
-# Initialize session state for images
+# Initialize session state for images and download buttons
 if 'images' not in st.session_state:
     st.session_state.images = []
+if 'download_buttons' not in st.session_state:
+    st.session_state.download_buttons = {}
 
 # Function to get all image paths
 def get_image_paths():
@@ -95,6 +97,10 @@ for image_path in filtered_image_paths:
 
             # Button to load download button
             if st.button(f"Load Download Button for {image_path}", key=f"button_{image_path}"):
+                st.session_state.download_buttons[image_path] = True
+
+            # Show download button if it was pressed
+            if st.session_state.download_buttons.get(image_path):
                 st.download_button(
                     label="Download Full Resolution",
                     data=requests.get(full_url).content,
