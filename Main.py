@@ -77,7 +77,10 @@ for image_path in filtered_image_paths:
     preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
     full_url = f"{base_url}/image/{image_path}"
     try:
-        response = requests.get(preview_url)
+        if req_1 == "NWS":
+            response = requests.get(full_url)
+        else:
+            response = requests.get(preview_url)
         if response.status_code == 200:
             image = Image.open(BytesIO(response.content))
             st.image(image, caption=image_path, use_column_width=True)
