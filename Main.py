@@ -121,7 +121,7 @@ elif viewmode == "Frame view":
 
     with col1:
         if st.button("Previous"):
-            image_index -= 1
+            image_index += -1
     with col2:
         if st.button("Next"):
             image_index += 1
