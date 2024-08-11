@@ -106,36 +106,20 @@ if viewmode == "List view":
 
 elif viewmode == "Frame view":
     image_index = 0
-    st.markdown(
-    """
-    <style>
-    .button-container {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-    }
-    .button-container button {
-        width: 45%;
-        height: 50px;
-        font-size: 16px;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-    )
+    col1, col2, col3 = st.columns([1, 2, 1])
 
-    # Container for the buttons
-    st.markdown('<div class="button-container">', unsafe_allow_html=True)
+    # Display the buttons centered within the middle column
+    with col1:
+        st.write("")
 
-    # Buttons with conditional logic
-    if st.button('Left Button', key='left'):
-        st.write("Left Button Clicked")
+    with col2:
+        if st.button('Left Button', key='left'):
+            st.write("Left Button Clicked")
+        if st.button('Right Button', key='right'):
+            st.write("Right Button Clicked")
 
-    if st.button('Right Button', key='right'):
-        st.write("Right Button Clicked")
-
-    # Close the container div
-    st.markdown('</div>', unsafe_allow_html=True)
+    with col3:
+        st.write("")
     image_path = filtered_image_paths[image_index]
     preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
     full_url = f"{base_url}/image/{image_path}"
