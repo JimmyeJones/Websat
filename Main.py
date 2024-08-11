@@ -106,6 +106,7 @@ if viewmode == "List view":
 
 elif viewmode == "Frame view":
     image_index = 0
+    col1, col2 = st.columns([1, 1])
     st.markdown(
     """
     <style>
