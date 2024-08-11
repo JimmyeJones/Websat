@@ -114,37 +114,38 @@ if viewmode == "List view":
 
 
 elif viewmode == "Frame view":
-    image_index = 0
+    while viewmode == "Frame view":
+        image_index = 0
 
-# Displaying the buttons inside the container
-    col1, col2 = st.columns(2)
+        # Displaying the buttons inside the container
+        col1, col2 = st.columns(2)
 
-    with col1:
-        if st.button("Previous"):
-            image_index += -1
-    with col2:
-        if st.button("Next"):
-            image_index += 1
+        with col1:
+            if st.button("Previous"):
+                image_index += -1
+        with col2:
+            if st.button("Next"):
+                image_index += 1
             
-    image_path = filtered_image_paths[image_index]
-    preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
-    full_url = f"{base_url}/image/{image_path}"
-    try:
-        if req_1 == "NWS":
-            response = requests.get(full_url)
-        else:
-            response = requests.get(preview_url)
-        if response.status_code == 200:
-            image = Image.open(BytesIO(response.content))
-            st.image(image, caption=image_path, use_column_width=True)
-            if st.button(f"Load Download Button for {image_path}"):
-                st.download_button(
-                    label="Download Full Resolution",
-                    data=requests.get(full_url).content,
-                    file_name=image_path.split("/")[-1],
-                    mime='image/jpeg'
-                )
-        else:
-            st.write(f"Error loading preview: {response.status_code}")
-    except Exception as e:
-        st.write(f"Exception loading preview: {e}")   
+        image_path = filtered_image_paths[image_index]
+        preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
+        full_url = f"{base_url}/image/{image_path}"
+        try:
+            if req_1 == "NWS":
+                response = requests.get(full_url)
+            else:
+                response = requests.get(preview_url)
+            if response.status_code == 200:
+                image = Image.open(BytesIO(response.content))
+                st.image(image, caption=image_path, use_column_width=True)
+                if st.button(f"Load Download Button for {image_path}"):
+                    st.download_button(
+                        label="Download Full Resolution",
+                        data=requests.get(full_url).content,
+                        file_name=image_path.split("/")[-1],
+                        mime='image/jpeg'
+                    )
+            else:
+                st.write(f"Error loading preview: {response.status_code}")
+        except Exception as e:
+            st.write(f"Exception loading preview: {e}")   
