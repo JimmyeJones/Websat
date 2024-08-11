@@ -108,11 +108,11 @@ elif viewmode == "Frame view":
     image_index = 0
     left_column, right_column = st.columns([2, 1])
     # Button on the left side
-    if left_column.button('Button Left'):
+    if left_column.button("Previous):
         st.write('Button Left clicked!')
 
     # Button on the right side
-    if right_column.button('Button Right'):
+    if right_column.button("Next"):
         st.write('Button Right clicked!')
     image_path = filtered_image_paths[image_index]
     preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
