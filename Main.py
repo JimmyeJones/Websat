@@ -115,10 +115,10 @@ elif viewmode == "Frame view":
     col1, col2 = st.columns(2)
 
     with col1:
-        if st.button("Previous") and st.session_state.image_index > 0:
+        if st.button("Next") and st.session_state.image_index > 0:
             st.session_state.image_index -= 1
     with col2:
-        if st.button("Next") and st.session_state.image_index < len(filtered_image_paths) - 1:
+        if st.button("Previous") and st.session_state.image_index < len(filtered_image_paths) - 1:
             st.session_state.image_index += 1
             
     image_path = filtered_image_paths[st.session_state.image_index]
