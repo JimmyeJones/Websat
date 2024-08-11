@@ -101,4 +101,32 @@ if viewmode == "List view":
             else:
                 st.write(f"Error loading preview: {response.status_code}")
         except Exception as e:
-            st.write(f"Exception loading preview: {e}")
+            st.write(f"Exception loading preview: {e}")   
+
+
+
+elif viewmode == "Frame view":
+    image_index = 0
+    image_path = filtered_image_paths[image_index]
+    preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
+    full_url = f"{base_url}/image/{image_path}"
+    try:
+        if req_1 == "NWS":
+            response = requests.get(full_url)
+        else:
+            response = requests.get(preview_url)
+        if response.status_code == 200:
+            image = Image.open(BytesIO(response.content))
+            st.image(image, caption=image_path, use_column_width=True)
+            images_shown += 1
+            if st.button(f"Load Download Button for {image_path}"):
+                st.download_button(
+                    label="Download Full Resolution",
+                    data=requests.get(full_url).content,
+                    file_name=image_path.split("/")[-1],
+                    mime='image/jpeg'
+                )
+        else:
+            st.write(f"Error loading preview: {response.status_code}")
+    except Exception as e:
+        st.write(f"Exception loading preview: {e}")   
