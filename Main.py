@@ -109,25 +109,23 @@ elif viewmode == "Frame view":
     st.markdown(
     """
     <style>
-    .left-button {
-        position: absolute;
-        left: 0;
-        width: 49%;
-    }
-    .right-button {
-        position: absolute;
-        right: 0;
-        width: 49%;
+    .button-container button {
+        width: 100%;
+        height: 50px;
     }
     </style>
     """,
     unsafe_allow_html=True
     )
 
-    # Create two buttons with the custom CSS classes
-    st.markdown('<button class="left-button">Left Button</button>', unsafe_allow_html=True)
-    st.markdown('<button class="right-button">Right Button</button>', unsafe_allow_html=True)
+    # Display the buttons conditionally within columns
+    with col1:
+        if st.button('Left Button', key='left'):
+            st.write("Left Button Clicked")
 
+    with col2:
+        if st.button('Right Button', key='right'):
+            st.write("Right Button Clicked")
     # Add image below the buttons
     image_path = filtered_image_paths[image_index]
     preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
