@@ -110,9 +110,8 @@ if viewmode == "List view":
         except Exception as e:
             st.write(f"Exception loading preview: {e}")   
 
-
 image_index = 0
-if viewmode == "Frame view":
+while viewmode == "Frame view":
         
 
     # Displaying the buttons inside the container
