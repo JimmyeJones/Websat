@@ -106,14 +106,30 @@ if viewmode == "List view":
 
 elif viewmode == "Frame view":
     image_index = 0
-    left_column, right_column = st.columns([1, 1])
-    # Button on the left side
-    if left_column.button("Previous"):
-        st.write('Button Left clicked!')
+    st.markdown(
+    """
+    <style>
+    .stButton>div:first-child {
+        width: 100%;
+        text-align: left;
+    }
+    .stButton>div:last-child {
+        width: 100%;
+        text-align: right;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
-    # Button on the right side
-    if right_column.button("Next"):
-        st.write('Button Right clicked!')
+# Create buttons aligned as desired
+if st.button('Button Left'):
+    st.write('Button Left clicked!')
+
+st.write("")  # Add space between buttons
+
+if st.button('Button Right'):
+    st.write('Button Right clicked!')
     image_path = filtered_image_paths[image_index]
     preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
     full_url = f"{base_url}/image/{image_path}"
