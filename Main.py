@@ -109,12 +109,13 @@ elif viewmode == "Frame view":
     st.markdown(
     """
     <style>
-    .container {
+    .button-container {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
+        gap: 10px;
     }
-    .container button {
-        width: 49%;
+    .button-container button {
+        width: 45%;
         height: 50px;
         font-size: 16px;
     }
@@ -124,7 +125,7 @@ elif viewmode == "Frame view":
     )
 
     # Container for the buttons
-    st.markdown('<div class="container">', unsafe_allow_html=True)
+    st.markdown('<div class="button-container">', unsafe_allow_html=True)
 
     # Buttons with conditional logic
     if st.button('Left Button', key='left'):
@@ -135,7 +136,6 @@ elif viewmode == "Frame view":
 
     # Close the container div
     st.markdown('</div>', unsafe_allow_html=True)
-    # Add image below the buttons
     image_path = filtered_image_paths[image_index]
     preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
     full_url = f"{base_url}/image/{image_path}"
