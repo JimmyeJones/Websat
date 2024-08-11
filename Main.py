@@ -109,13 +109,15 @@ elif viewmode == "Frame view":
     st.markdown(
     """
     <style>
-    .stButton>div:first-child {
-        width: 100%;
-        text-align: left;
+    .stButton {
+        display: inline-block;
+        width: 49%;
     }
-    .stButton>div:last-child {
-        width: 100%;
-        text-align: right;
+    .stButton:first-child {
+        float: left;
+    }
+    .stButton:last-child {
+        float: right;
     }
     </style>
     """,
@@ -125,8 +127,6 @@ elif viewmode == "Frame view":
 # Create buttons aligned as desired
 if st.button('Button Left'):
     st.write('Button Left clicked!')
-
-st.write("")  # Add space between buttons
 
 if st.button('Button Right'):
     st.write('Button Right clicked!')
