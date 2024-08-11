@@ -113,8 +113,9 @@ if viewmode == "List view":
 
 
 elif viewmode == "Frame view":
+    image_index = 0
     while viewmode == "Frame view":
-        image_index = 0
+        
 
         # Displaying the buttons inside the container
         col1, col2 = st.columns(2)
