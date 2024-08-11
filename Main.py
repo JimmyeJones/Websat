@@ -121,11 +121,10 @@ elif viewmode == "Frame view":
 
     with col1:
         if st.button("Previous"):
-            st.write("Left Button Clicked")
-
+            image_index -= 1
     with col2:
         if st.button("Next"):
-            st.write("Right Button Clicked")
+            image_index += 1
             
     image_path = filtered_image_paths[image_index]
     preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
