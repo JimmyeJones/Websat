@@ -116,10 +116,6 @@ elif viewmode == "Frame view":
     .button-container button {
         flex: 1;
     }
-    .image-container {
-        text-align: center;
-        margin-top: 20px;
-    }
     </style>
     """,
     unsafe_allow_html=True
