@@ -3,11 +3,13 @@ from PIL import Image
 import requests
 from io import BytesIO
 from datetime import datetime
+
 st.set_page_config(
     page_title="Websat",
     page_icon="https://raw.githubusercontent.com/JimmyeJones/Websat/main/icon.jpg",
     initial_sidebar_state="expanded"
 )
+
 # IP of Flask server
 base_url = st.secrets["IP"]
 
@@ -15,7 +17,6 @@ st.title("WebSat")
 st.text("Satellite reception site")
 
 viewmode = st.selectbox("Select display mode", ["List view", "Frame view"])
-
 
 # Sidebar
 req_1 = st.sidebar.selectbox("Satellite/Source", ["GOES-16", "GOES-18", "NWS", "Unknown"])
@@ -72,9 +73,8 @@ for path in sorted_image_paths:
                         filtered_image_paths.append(path)
                 elif req_4 in path:
                     filtered_image_paths.append(path)
+
 st.write(f"Found {len(filtered_image_paths)} images.")
-
-
 
 if viewmode == "List view":
     load_limit = st.slider("Number of Images to load", 0, 50, 5, 5)
@@ -106,23 +106,22 @@ if viewmode == "List view":
         except Exception as e:
             st.write(f"Exception loading preview: {e}")   
 
-while viewmode == "Frame view":
-    try:            
-        image_index
-    except NameError:
-        image_index = 0
+elif viewmode == "Frame view":
+    # Set up the stateful image index
+    if "image_index" not in st.session_state:
+        st.session_state.image_index = 0
 
     # Displaying the buttons inside the container
     col1, col2 = st.columns(2)
 
     with col1:
-        if st.button("Previous"):
-            image_index += -1
+        if st.button("Previous") and st.session_state.image_index > 0:
+            st.session_state.image_index -= 1
     with col2:
-        if st.button("Next"):
-            image_index += 1
+        if st.button("Next") and st.session_state.image_index < len(filtered_image_paths) - 1:
+            st.session_state.image_index += 1
             
-    image_path = filtered_image_paths[image_index]
+    image_path = filtered_image_paths[st.session_state.image_index]
     preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
     full_url = f"{base_url}/image/{image_path}"
     try:
@@ -143,4 +142,4 @@ while viewmode == "Frame view":
         else:
             st.write(f"Error loading preview: {response.status_code}")
     except Exception as e:
-        st.write(f"Exception loading preview: {e}")   
+        st.write(f"Exception loading preview: {e}")
