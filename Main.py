@@ -109,27 +109,33 @@ elif viewmode == "Frame view":
     st.markdown(
     """
     <style>
-    .stButton {
-        display: inline-block;
-        width: 49%;
+    .button-container {
+        display: flex;
+        justify-content: space-between;
     }
-    .stButton:first-child {
-        float: left;
+    .button-container button {
+        flex: 1;
     }
-    .stButton:last-child {
-        float: right;
+    .image-container {
+        text-align: center;
+        margin-top: 20px;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Create buttons aligned as desired
-if st.button('Button Left'):
-    st.write('Button Left clicked!')
+# Create buttons in a container
+button_container = st.empty()
+with button_container.container() as buttons:
+    col1, col2 = st.columns(2)
+    if col1.button('Button Left'):
+        st.write('Button Left clicked!')
+    if col2.button('Button Right'):
+        st.write('Button Right clicked!')
 
-if st.button('Button Right'):
-    st.write('Button Right clicked!')
+# Add image below the buttons
+st.markdown("---")
     image_path = filtered_image_paths[image_index]
     preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
     full_url = f"{base_url}/image/{image_path}"
