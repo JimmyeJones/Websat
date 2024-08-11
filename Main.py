@@ -106,13 +106,27 @@ if viewmode == "List view":
 
 elif viewmode == "Frame view":
     image_index = 0
-    col1, col2, col3 = st.columns([1, 2, 1])
+    st.markdown(
+    """
+    <style>
+    .left-button {
+        position: absolute;
+        left: 0;
+        width: 49%;
+    }
+    .right-button {
+        position: absolute;
+        right: 0;
+        width: 49%;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+    )
 
-    with col1:
-        st.button('Left Button', key='left')
-
-    with col3:
-        st.button('Right Button', key='right')
+    # Create two buttons with the custom CSS classes
+    st.markdown('<button class="left-button">Left Button</button>', unsafe_allow_html=True)
+    st.markdown('<button class="right-button">Right Button</button>', unsafe_allow_html=True)
 
     # Add image below the buttons
     image_path = filtered_image_paths[image_index]
