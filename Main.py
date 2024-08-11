@@ -109,12 +109,12 @@ if viewmode == "List view":
                 st.write(f"Error loading preview: {response.status_code}")
         except Exception as e:
             st.write(f"Exception loading preview: {e}")   
-try:            
-    image_index
-except NameError:
-    image_index = 0
-if viewmode == "Frame view":
-        
+
+while viewmode == "Frame view":
+    try:            
+        image_index
+    except NameError:
+        image_index = 0
 
     # Displaying the buttons inside the container
     col1, col2 = st.columns(2)
