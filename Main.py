@@ -6,11 +6,7 @@ from datetime import datetime
 st.set_page_config(
     page_title="Websat",
     page_icon="https://raw.githubusercontent.com/JimmyeJones/Websat/main/icon.jpg",
-    initial_sidebar_state="expanded",
-    menu_items={
-        'Report a bug': "https://www.extremelycoolapp.com/bug",
-        'About': "# This is a header. This is an *extremely* cool app!"
-    }
+    initial_sidebar_state="expanded"
 )
 # IP of Flask server
 base_url = st.secrets["IP"]
