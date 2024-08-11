@@ -10,6 +10,8 @@ base_url = st.secrets["IP"]
 st.title("WebSat")
 st.text("Satellite reception site")
 
+viewmode = st.selectbox("Select display mode", ["List view", "Frame view"]
+
 load_limit = st.slider("Number of Images to load", 0, 50, 5, 5)
 
 # Sidebar
@@ -69,30 +71,34 @@ for path in sorted_image_paths:
                     filtered_image_paths.append(path)
 st.write(f"Found {len(filtered_image_paths)} images.")
 
-# Display images
-images_shown = 0
-for image_path in filtered_image_paths:
-    if images_shown >= load_limit:
-        break
-    preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
-    full_url = f"{base_url}/image/{image_path}"
-    try:
-        if req_1 == "NWS":
-            response = requests.get(full_url)
-        else:
-            response = requests.get(preview_url)
-        if response.status_code == 200:
-            image = Image.open(BytesIO(response.content))
-            st.image(image, caption=image_path, use_column_width=True)
-            images_shown += 1
-            if st.button(f"Load Download Button for {image_path}"):
-                st.download_button(
-                    label="Download Full Resolution",
-                    data=requests.get(full_url).content,
-                    file_name=image_path.split("/")[-1],
-                    mime='image/jpeg'
-                )
-        else:
-            st.write(f"Error loading preview: {response.status_code}")
-    except Exception as e:
-        st.write(f"Exception loading preview: {e}")
+
+
+if viewmode == "List view":
+    
+    # Display images
+    images_shown = 0
+    for image_path in filtered_image_paths:
+        if images_shown >= load_limit:
+            break
+        preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
+        full_url = f"{base_url}/image/{image_path}"
+        try:
+            if req_1 == "NWS":
+                response = requests.get(full_url)
+            else:
+                response = requests.get(preview_url)
+            if response.status_code == 200:
+                image = Image.open(BytesIO(response.content))
+                st.image(image, caption=image_path, use_column_width=True)
+                images_shown += 1
+                if st.button(f"Load Download Button for {image_path}"):
+                    st.download_button(
+                        label="Download Full Resolution",
+                        data=requests.get(full_url).content,
+                        file_name=image_path.split("/")[-1],
+                        mime='image/jpeg'
+                    )
+            else:
+                st.write(f"Error loading preview: {response.status_code}")
+        except Exception as e:
+            st.write(f"Exception loading preview: {e}")
