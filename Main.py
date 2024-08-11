@@ -106,43 +106,18 @@ if viewmode == "List view":
 
 elif viewmode == "Frame view":
     image_index = 0
-    st.markdown(
-    """
-    <style>
-    .centered-buttons {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-    }
-    .centered-buttons div {
-        flex: 1;
-    }
-    .centered-buttons button {
-        width: 100%;
-        height: 50px;
-        font-size: 16px;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-    )
-
-    # Flexbox container for buttons
-    st.markdown('<div class="centered-buttons">', unsafe_allow_html=True)
 
 # Displaying the buttons inside the container
-    col1, col2 = st.columns([1, 1])
+    col1, col2 = st.columns(2)
 
     with col1:
-        if st.button('Left Button'):
+        if st.button("Previous"):
             st.write("Left Button Clicked")
 
     with col2:
-        if st.button('Right Button'):
+        if st.button("Next"):
             st.write("Right Button Clicked")
-
-    # Close the container div
-    st.markdown('</div>', unsafe_allow_html=True)
+            
     image_path = filtered_image_paths[image_index]
     preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
     full_url = f"{base_url}/image/{image_path}"
