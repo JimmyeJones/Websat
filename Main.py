@@ -6,7 +6,7 @@ from datetime import datetime
 
 st.set_page_config(
     page_title="Websat",
-    page_icon="🧊",
+    page_icon=icon.jpg,
     layout="wide",
     initial_sidebar_state="expanded",
     menu_items={
