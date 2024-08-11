@@ -5,7 +5,7 @@ from io import BytesIO
 from datetime import datetime
 st.set_page_config(
     page_title="Websat",
-    page_icon="https://github.com/JimmyeJones/Websat/blob/8e9207685c65439709d733dda75732262c4e4cf1/icon.jpg",
+    page_icon="https://raw.githubusercontent.com/JimmyeJones/Websat/main/icon.jpg",
     layout="wide",
     initial_sidebar_state="expanded",
     menu_items={
