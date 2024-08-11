@@ -106,7 +106,7 @@ if viewmode == "List view":
 
 elif viewmode == "Frame view":
     image_index = 0
-    left_column, right_column = st.columns([1, None])
+    left_column, right_column = st.columns([1, 4])
     # Button on the left side
     if left_column.button('Button Left'):
         st.write('Button Left clicked!')
