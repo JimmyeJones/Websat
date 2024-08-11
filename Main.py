@@ -12,7 +12,6 @@ st.text("Satellite reception site")
 
 viewmode = st.selectbox("Select display mode", ["List view", "Frame view"])
 
-load_limit = st.slider("Number of Images to load", 0, 50, 5, 5)
 
 # Sidebar
 req_1 = st.sidebar.selectbox("Satellite/Source", ["GOES-16", "GOES-18", "NWS", "Unknown"])
@@ -74,7 +73,7 @@ st.write(f"Found {len(filtered_image_paths)} images.")
 
 
 if viewmode == "List view":
-    
+    load_limit = st.slider("Number of Images to load", 0, 50, 5, 5)
     # Display images
     images_shown = 0
     for image_path in filtered_image_paths:
@@ -118,7 +117,6 @@ elif viewmode == "Frame view":
         if response.status_code == 200:
             image = Image.open(BytesIO(response.content))
             st.image(image, caption=image_path, use_column_width=True)
-            images_shown += 1
             if st.button(f"Load Download Button for {image_path}"):
                 st.download_button(
                     label="Download Full Resolution",
