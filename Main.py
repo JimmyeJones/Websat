@@ -106,32 +106,15 @@ if viewmode == "List view":
 
 elif viewmode == "Frame view":
     image_index = 0
-    st.markdown(
-    """
-    <style>
-    .button-container {
-        display: flex;
-        justify-content: space-between;
-    }
-    .button-container button {
-        flex: 1;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-    )
+    col1, col2, col3 = st.columns([1, 2, 1])
 
-# Create buttons in a container
-    button_container = st.empty()
-    with button_container.container() as buttons:
-        col1, col2 = st.columns(2)
-        if col1.button('Button Left'):
-            st.write('Button Left clicked!')
-        if col2.button('Button Right'):
-            st.write('Button Right clicked!')
+    with col1:
+        st.button('Left Button', key='left')
 
-# Add image below the buttons
-    st.markdown("---")
+    with col3:
+        st.button('Right Button', key='right')
+
+    # Add image below the buttons
     image_path = filtered_image_paths[image_index]
     preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
     full_url = f"{base_url}/image/{image_path}"
