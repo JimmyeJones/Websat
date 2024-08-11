@@ -112,7 +112,7 @@ if viewmode == "List view":
 
 
 image_index = 0
-elif viewmode == "Frame view":
+if viewmode == "Frame view":
         
 
     # Displaying the buttons inside the container
