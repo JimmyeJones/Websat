@@ -10,7 +10,7 @@ base_url = st.secrets["IP"]
 st.title("WebSat")
 st.text("Satellite reception site")
 
-viewmode = st.selectbox("Select display mode", ["List view", "Frame view"]
+viewmode = st.selectbox("Select display mode", ["List view", "Frame view"])
 
 load_limit = st.slider("Number of Images to load", 0, 50, 5, 5)
 
