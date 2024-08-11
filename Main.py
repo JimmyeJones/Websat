@@ -3,7 +3,7 @@ from PIL import Image
 import requests
 from io import BytesIO
 from datetime import datetime
-
+import icon.jpg
 st.set_page_config(
     page_title="Websat",
     page_icon=icon.jpg,
