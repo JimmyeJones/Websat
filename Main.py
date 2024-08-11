@@ -106,27 +106,35 @@ if viewmode == "List view":
 
 elif viewmode == "Frame view":
     image_index = 0
-    col1, col2 = st.columns([1, 1])
     st.markdown(
     """
     <style>
-    .button-container button {
-        width: 100%;
+    .container {
+        display: flex;
+        justify-content: space-between;
+    }
+    .container button {
+        width: 49%;
         height: 50px;
+        font-size: 16px;
     }
     </style>
     """,
     unsafe_allow_html=True
     )
 
-    # Display the buttons conditionally within columns
-    with col1:
-        if st.button('Left Button', key='left'):
-            st.write("Left Button Clicked")
+    # Container for the buttons
+    st.markdown('<div class="container">', unsafe_allow_html=True)
 
-    with col2:
-        if st.button('Right Button', key='right'):
-            st.write("Right Button Clicked")
+    # Buttons with conditional logic
+    if st.button('Left Button', key='left'):
+        st.write("Left Button Clicked")
+
+    if st.button('Right Button', key='right'):
+        st.write("Right Button Clicked")
+
+    # Close the container div
+    st.markdown('</div>', unsafe_allow_html=True)
     # Add image below the buttons
     image_path = filtered_image_paths[image_index]
     preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
