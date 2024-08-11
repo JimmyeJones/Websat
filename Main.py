@@ -123,19 +123,19 @@ elif viewmode == "Frame view":
     </style>
     """,
     unsafe_allow_html=True
-)
+    )
 
 # Create buttons in a container
-button_container = st.empty()
-with button_container.container() as buttons:
-    col1, col2 = st.columns(2)
-    if col1.button('Button Left'):
-        st.write('Button Left clicked!')
-    if col2.button('Button Right'):
-        st.write('Button Right clicked!')
+    button_container = st.empty()
+    with button_container.container() as buttons:
+        col1, col2 = st.columns(2)
+        if col1.button('Button Left'):
+            st.write('Button Left clicked!')
+        if col2.button('Button Right'):
+            st.write('Button Right clicked!')
 
 # Add image below the buttons
-st.markdown("---")
+    st.markdown("---")
     image_path = filtered_image_paths[image_index]
     preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
     full_url = f"{base_url}/image/{image_path}"
