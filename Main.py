@@ -109,9 +109,10 @@ if viewmode == "List view":
                 st.write(f"Error loading preview: {response.status_code}")
         except Exception as e:
             st.write(f"Exception loading preview: {e}")   
-            
-image_index
-    
+try:            
+    image_index
+except NameError:
+    image_index = 0
 if viewmode == "Frame view":
         
 
