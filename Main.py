@@ -120,8 +120,10 @@ elif viewmode == "Frame view":
     with col2:
         if st.button("Previous") and st.session_state.image_index < len(filtered_image_paths) - 1:
             st.session_state.image_index += 1
-            
-    image_path = filtered_image_paths[st.session_state.image_index]
+    try:        
+        image_path = filtered_image_paths[st.session_state.image_index]
+    except IndexError:
+        st.rerun()
     preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
     full_url = f"{base_url}/image/{image_path}"
     try:
@@ -131,10 +133,7 @@ elif viewmode == "Frame view":
             response = requests.get(preview_url)
         if response.status_code == 200:
             image = Image.open(BytesIO(response.content))
-            try:
-                st.image(image, caption=image_path, use_column_width=True)
-            except IndexError:
-                st.rerun()
+            st.image(image, caption=image_path, use_column_width=True)
             if st.button(f"Load Download Button for {image_path}"):
                 st.download_button(
                     label="Download Full Resolution",
