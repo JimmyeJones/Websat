@@ -119,11 +119,8 @@ elif viewmode == "Frame view":
             st.session_state.image_index -= 1
     with col2:
         if st.button("Previous") and st.session_state.image_index < len(filtered_image_paths) - 1:
-            st.session_state.image_index += 1
-    try:        
-        image_path = filtered_image_paths[st.session_state.image_index]
-    except IndexError:
-        st.session_state.image_index = 0
+            st.session_state.image_index += 1     
+    image_path = filtered_image_paths[st.session_state.image_index]
     preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
     full_url = f"{base_url}/image/{image_path}"
     try:
