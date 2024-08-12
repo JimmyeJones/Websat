@@ -131,7 +131,10 @@ elif viewmode == "Frame view":
             response = requests.get(preview_url)
         if response.status_code == 200:
             image = Image.open(BytesIO(response.content))
-            st.image(image, caption=image_path, use_column_width=True)
+            try:
+                st.image(image, caption=image_path, use_column_width=True)
+            except IndexError:
+                st.rerun()
             if st.button(f"Load Download Button for {image_path}"):
                 st.download_button(
                     label="Download Full Resolution",
