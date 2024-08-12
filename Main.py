@@ -123,7 +123,7 @@ elif viewmode == "Frame view":
     try:        
         image_path = filtered_image_paths[st.session_state.image_index]
     except IndexError:
-        st.rerun()
+        st.session_state.image_index = 0
     preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
     full_url = f"{base_url}/image/{image_path}"
     try:
