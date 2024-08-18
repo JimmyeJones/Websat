@@ -13,7 +13,7 @@ st.markdown(
     """
     <style>
     /* replace the class below with the class of the fork and GitHub buttons */
-    .st-emotion-cache-q16mip e3g6aar1 {
+    .st-emotion-cache-h4xjwg ezrtsby2{
         display: none;
     }
     </style>
