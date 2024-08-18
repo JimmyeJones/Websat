@@ -12,10 +12,7 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    .st-emotion-cache-h4xjwg.ezrtsby2 {
-        visibility: hidden;
-    }
-    .viewerBadge_container__r5tak styles_viewerBadge__CvC9N {
+    .st-emotion-cache-h4xjwg.ezrtsby2, viewerBadge_container__r5tak styles_viewerBadge__CvC9N {
         visibility: hidden;
     }
     </style>
