@@ -15,6 +15,9 @@ st.markdown(
     .st-emotion-cache-h4xjwg.ezrtsby2, .viewerBadge_container__r5tak styles_viewerBadge__CvC9N, #id1, #id2 {
         visibility: hidden;
     }
+    .viewerBadge_container__r5tak, .styles_viewerBadge__CvC9N {{
+        display: none;
+    }}
     </style>
     """,
     unsafe_allow_html=True,
