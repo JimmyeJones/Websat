@@ -12,9 +12,8 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    /* replace the class below with the class of the fork and GitHub buttons */
-    .st-emotion-cache-h4xjwg ezrtsby2{
-        display: none;
+    .st-emotion-cache-h4xjwg.ezrtsby2 {
+        visibility: hidden;
     }
     </style>
     """,
