@@ -12,7 +12,7 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    .st-emotion-cache-mnu3yk.ef3psqc6, .viewerBadge_link__qRIco {
+    .st-emotion-cache-mnu3yk.ef3psqc6, .viewerBadge_link__qRIco, .viewerBadge_container__r5tak.styles_viewerBadge__CvC9N {
         display: none;
     }
     </style>
