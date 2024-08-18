@@ -3,6 +3,12 @@ from PIL import Image
 import requests
 from io import BytesIO
 from datetime import datetime
+
+st.set_page_config(
+    page_title="Websat",
+    page_icon="https://raw.githubusercontent.com/JimmyeJones/Websat/main/icon.jpg",
+    initial_sidebar_state="expanded"
+)
 st.markdown(
     """
     <style>
@@ -14,11 +20,7 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-st.set_page_config(
-    page_title="Websat",
-    page_icon="https://raw.githubusercontent.com/JimmyeJones/Websat/main/icon.jpg",
-    initial_sidebar_state="expanded"
-)
+
 
 # IP of Flask server
 base_url = st.secrets["IP"]
