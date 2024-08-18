@@ -24,27 +24,6 @@ st.markdown(
 )
 #END OF PAGE SETUP
 
-
-# IP of Flask server
-base_url = st.secrets["IP"]
-
-st.title("WebSat")
-st.text("Satellite reception site")
-
-viewmode = st.selectbox("Select display mode", ["List view", "Frame view"])
-
-# Sidebar
-req_1 = st.sidebar.selectbox("Satellite/Source", ["GOES-16", "GOES-18", "NWS", "Unknown"])
-if req_1 == "GOES-16":
-    prereq_2 = ["", "Full Disk", "Mesoscale 1", "Mesoscale 2"]
-elif req_1 == "GOES-18":
-    prereq_2 = ["", "Full Disk"]
-elif req_1 == "NWS" or req_1 == "Unknown":
-    prereq_2 = [""]
-req_2 = st.sidebar.selectbox("Image Size", prereq_2)
-req_3 = st.sidebar.selectbox("Channel", ["", "_Clean_Longwave_IR_Window", "Dirty_Longwave_Window", "Dirty_Longwave_Window_-_CIRA", "GEO_False_Color", "Infrared_Longwave_Window_Band", "Mid-level_Tropospheric_Water_Vapor", "Shortwave_Window_Band", "Upper-Level_Tropospheric_Water_Vapor", "G16_2", "G16_7", "G16_8", "G16_9", "G16_13", "G16_14", "G16_15"])
-req_4 = st.sidebar.selectbox("Overlay", ["", "_map"])
-
 # Function to get all image paths
 def get_image_paths():
     try:
@@ -69,6 +48,37 @@ def extract_datetime_from_path(path):
 
 # Get the list of image paths
 all_image_paths = get_image_paths()
+
+
+
+
+# IP of Flask server
+base_url = st.secrets["IP"]
+
+st.title("WebSat")
+st.text("Satellite reception site")
+
+viewmode = st.selectbox("Select display mode", ["List view", "Frame view"])
+
+# Sidebar
+req_1 = st.sidebar.selectbox("Satellite/Source", ["GOES-16", "GOES-18", "NWS", "Unknown"])
+req_1_image_paths = []
+for image86 in all_image_paths:
+    if req_1 in image86:
+        req_1_image_paths.append(image86)
+preprereq_2 = ["", "Full Disk", "Mesoscale 1", "Mesoscale 2"]
+prereq_2 = []
+for imagepath1 in req_1_image_paths:
+    for pre in preprereq_2:
+        if pre in imagepath1:
+            prereq_2.append(pre)
+            break
+            
+req_2 = st.sidebar.selectbox("Image Size", prereq_2)
+req_3 = st.sidebar.selectbox("Channel", ["", "_Clean_Longwave_IR_Window", "Dirty_Longwave_Window", "Dirty_Longwave_Window_-_CIRA", "GEO_False_Color", "Infrared_Longwave_Window_Band", "Mid-level_Tropospheric_Water_Vapor", "Shortwave_Window_Band", "Upper-Level_Tropospheric_Water_Vapor", "G16_2", "G16_7", "G16_8", "G16_9", "G16_13", "G16_14", "G16_15"])
+req_4 = st.sidebar.selectbox("Overlay", ["", "_map"])
+
+
 
 # Separate paths with valid dates and those without
 paths_with_dates = [path for path in all_image_paths if extract_datetime_from_path(path) is not None]
