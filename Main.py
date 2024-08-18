@@ -71,10 +71,8 @@ viewmode = st.selectbox("Select display mode", ["List view", "Frame view"])
 req_1 = st.sidebar.selectbox("Satellite/Source", ["GOES-16", "GOES-18", "NWS", "Unknown"])
 req_1_image_paths = []
 for image86 in all_image_paths:
-    st.text(image86)
     if req_1 in image86:
         req_1_image_paths.append(image86)
-st.text(req_1_image_paths)
 preprereq_2 = ["", "Full Disk", "Mesoscale 1", "Mesoscale 2"]
 prereq_2 = []
 for imagepath1 in req_1_image_paths:
