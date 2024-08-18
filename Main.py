@@ -20,7 +20,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-
 # IP of Flask server
 base_url = st.secrets["IP"]
 
