@@ -35,7 +35,13 @@ viewmode = st.selectbox("Select display mode", ["List view", "Frame view"])
 
 # Sidebar
 req_1 = st.sidebar.selectbox("Satellite/Source", ["GOES-16", "GOES-18", "NWS", "Unknown"])
-req_2 = st.sidebar.selectbox("Image Size", ["", "Full Disk", "Mesoscale 1", "Mesoscale 2"])
+if req_1 == "GOES-16":
+    prereq_2 = ["", "Full Disk", "Mesoscale 1", "Mesoscale 2"]
+elif req_1 == "GOES-18":
+    prereq_2 = ["", "Full Disk"]
+elif req_1 == "NWS" or req_1 == "Unknown":
+    prereq_2 = [""]
+req_2 = st.sidebar.selectbox("Image Size", prereq_2)
 req_3 = st.sidebar.selectbox("Channel", ["", "_Clean_Longwave_IR_Window", "Dirty_Longwave_Window", "Dirty_Longwave_Window_-_CIRA", "GEO_False_Color", "Infrared_Longwave_Window_Band", "Mid-level_Tropospheric_Water_Vapor", "Shortwave_Window_Band", "Upper-Level_Tropospheric_Water_Vapor", "G16_2", "G16_7", "G16_8", "G16_9", "G16_13", "G16_14", "G16_15"])
 req_4 = st.sidebar.selectbox("Overlay", ["", "_map"])
 
