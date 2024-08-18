@@ -12,9 +12,9 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    .viewerBadge_container__r5tak, .styles_viewerBadge__CvC9N {{
+    .st-emotion-cache-mnu3yk.ef3psqc6, .st-emotion-cache-mnu3yk.ef3psqc6 {
         display: none;
-    }}
+    }
     </style>
     """,
     unsafe_allow_html=True,
