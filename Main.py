@@ -69,6 +69,7 @@ viewmode = st.selectbox("Select display mode", ["List view", "Frame view"])
 
 # Sidebar
 req_1 = st.sidebar.selectbox("Satellite/Source", ["GOES-16", "GOES-18", "NWS", "Unknown"])
+
 req_1_image_paths = []
 for image86 in all_image_paths:
     if req_1 in image86:
@@ -96,8 +97,24 @@ for imagepath1 in req_1_image_paths:
             if pre not in prereq_3:
                 prereq_3.append(pre)
                 break
+
+
 req_3 = st.sidebar.selectbox("Channel", prereq_3)
-req_4 = st.sidebar.selectbox("Overlay", ["", "_map"])
+
+
+req_3_image_paths = []
+for image86 in req_2_image_paths:
+    if req_3 in image86:
+        req_3_image_paths.append(image86)
+preprereq_4 = ["", "_map"]
+prereq_4 = []
+for imagepath1 in req_2_image_paths:
+    for pre in preprereq_3:
+        if pre in imagepath1:
+            if pre not in prereq_4:
+                prereq_4.append(pre)
+                break
+req_4 = st.sidebar.selectbox("Overlay", prereq_4)
 
 
 
