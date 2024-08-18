@@ -24,6 +24,13 @@ st.markdown(
 )
 #END OF PAGE SETUP
 
+
+
+# IP of Flask server
+base_url = st.secrets["IP"]
+
+
+
 # Function to get all image paths
 def get_image_paths():
     try:
