@@ -4,11 +4,14 @@ import requests
 from io import BytesIO
 from datetime import datetime
 
+
+#PAGE SETUP
 st.set_page_config(
     page_title="Websat",
     page_icon="https://raw.githubusercontent.com/JimmyeJones/Websat/main/icon.jpg",
     initial_sidebar_state="expanded"
 )
+
 st.markdown(
     """
     <style>
@@ -19,6 +22,8 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+#END OF PAGE SETUP
+
 
 # IP of Flask server
 base_url = st.secrets["IP"]
@@ -87,7 +92,7 @@ for path in sorted_image_paths:
 st.write(f"Found {len(filtered_image_paths)} images.")
 
 if viewmode == "List view":
-    load_limit = st.slider("Number of Images to load", 0, 50, 5, 5)
+    load_limit = st.slider("Number of Images to load", 5, 50, 5, 5)
     # Display images
     images_shown = 0
     for image_path in filtered_image_paths:
@@ -122,15 +127,21 @@ elif viewmode == "Frame view":
         st.session_state.image_index = 0
 
     # Displaying the buttons inside the container
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
 
     with col1:
         if st.button("Next") and st.session_state.image_index > 0:
             st.session_state.image_index -= 1
     with col2:
+        if st.button("Reset"):
+            st.session_state.image_index = 0
+    with col3:
         if st.button("Previous") and st.session_state.image_index < len(filtered_image_paths) - 1:
-            st.session_state.image_index += 1     
-    image_path = filtered_image_paths[st.session_state.image_index]
+            st.session_state.image_index += 1   
+    try:
+        image_path = filtered_image_paths[st.session_state.image_index]
+    except IndexError:
+        st.session_state.image_index = 0
     preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
     full_url = f"{base_url}/image/{image_path}"
     try:
