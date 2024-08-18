@@ -3,7 +3,17 @@ from PIL import Image
 import requests
 from io import BytesIO
 from datetime import datetime
-
+st.markdown(
+    """
+    <style>
+    /* replace the class below with the class of the fork and GitHub buttons */
+    .st-emotion-cache-q16mip e3g6aar1 {
+        display: none;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 st.set_page_config(
     page_title="Websat",
     page_icon="https://raw.githubusercontent.com/JimmyeJones/Websat/main/icon.jpg",
