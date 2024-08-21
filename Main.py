@@ -156,7 +156,7 @@ if viewmode == "List view":
         preview_url = f"{base_url}/preview/{image_path}?width=700&height=700"
         full_url = f"{base_url}/image/{image_path}"
         try:
-            if req_1 == "NWS":
+            if req_1_out == "NWS":
                 response = requests.get(full_url)
             else:
                 response = requests.get(preview_url)
