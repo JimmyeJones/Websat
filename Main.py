@@ -73,9 +73,7 @@ prereq_1 = [["GOES-16", "GOES-18", "NWS", "Unknown"], ["GOES 16 Geostationary Sa
 
 req_1 = st.sidebar.selectbox("Satellite/Source", prereq_1[1])
 
-for input1 in prereq_1[1]:
-    if req_1 == input1:
-        req_1_out = prereq_1[0][prereq_1[1].index(req_1)]
+req_1_out = prereq_1[0][prereq_1[1].index(req_1)]
 
 req_1_image_paths = []
 for image86 in all_image_paths:
