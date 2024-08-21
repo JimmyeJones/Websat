@@ -68,7 +68,14 @@ st.text("Satellite reception site")
 viewmode = st.selectbox("Select display mode", ["List view", "Frame view"])
 
 # Sidebar
-req_1 = st.sidebar.selectbox("Satellite/Source", ["GOES-16", "GOES-18", "NWS", "Unknown"])
+
+prereq_1 = [["GOES-16", "GOES-18", "NWS", "Unknown"], ["GOES 16 Geostationary Satellite", "GOES 18 Geostationary Satellite", "National Weather Service", "Other"]]
+
+req_1 = st.sidebar.selectbox("Satellite/Source", prereq_1[1])
+
+for input1 in prereq_1[1]:
+    if req_1 == input1:
+        req_1_out == prereq_1[0][prereq_1[1].index(req_1)]
 
 req_1_image_paths = []
 for image86 in all_image_paths:
