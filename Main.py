@@ -207,3 +207,11 @@ elif viewmode == "Frame view":
             st.write(f"Error loading preview: {response.status_code}")
     except Exception as e:
         st.write(f"Exception loading preview: {e}")
+
+
+#Report a bug
+
+st.sidebar.link_button("Report a bug", "https://docs.google.com/forms/d/e/1FAIpQLSdHtg0td5xtoKiJftAAhd9x-T80IpTNn_cWLaxAHsNssbrVbw/viewform?usp=sf_link")
+
+#contact me
+st.sidebar.link_button("Contact", "mailto:app.websat@gmail.com")
