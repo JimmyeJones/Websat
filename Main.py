@@ -77,7 +77,7 @@ req_1_out = prereq_1[0][prereq_1[1].index(req_1)]
 
 req_1_image_paths = []
 for image86 in all_image_paths:
-    if req_1 in image86:
+    if req_1_out in image86:
         req_1_image_paths.append(image86)
 preprereq_2 = ["", "Full Disk", "Mesoscale 1", "Mesoscale 2"]
 prereq_2 = []
