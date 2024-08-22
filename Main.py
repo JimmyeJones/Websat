@@ -96,7 +96,7 @@ for image86 in req_1_image_paths:
         req_2_image_paths.append(image86)
 preprereq_3 = ["", "_Clean_Longwave_IR_Window", "Dirty_Longwave_Window", "Dirty_Longwave_Window_-_CIRA", "GEO_False_Color", "Infrared_Longwave_Window_Band", "Mid-level_Tropospheric_Water_Vapor", "Shortwave_Window_Band", "Upper-Level_Tropospheric_Water_Vapor", "G16_2", "G16_7", "G16_8", "G16_9", "G16_13", "G16_14", "G16_15"]
 prereq_3 = []
-for imagepath1 in req_1_image_paths:
+for imagepath1 in req_2_image_paths:
     for pre in preprereq_3:
         if pre in imagepath1:
             if pre not in prereq_3:
