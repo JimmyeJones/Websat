@@ -94,18 +94,19 @@ req_2_image_paths = []
 for image86 in req_1_image_paths:
     if req_2 in image86:
         req_2_image_paths.append(image86)
-preprereq_3 = ["", "_Clean_Longwave_IR_Window", "Dirty_Longwave_Window", "Dirty_Longwave_Window_-_CIRA", "GEO_False_Color", "Infrared_Longwave_Window_Band", "Mid-level_Tropospheric_Water_Vapor", "Shortwave_Window_Band", "Upper-Level_Tropospheric_Water_Vapor", "G16_2", "G16_7", "G16_8", "G16_9", "G16_13", "G16_14", "G16_15"]
+preprereq_3 = [["", "_Clean_Longwave_IR_Window", "Dirty_Longwave_Window", "Dirty_Longwave_Window_-_CIRA", "GEO_False_Color", "Infrared_Longwave_Window_Band", "Mid-level_Tropospheric_Water_Vapor", "Shortwave_Window_Band", "Upper-Level_Tropospheric_Water_Vapor", "G16_2", "G16_7", "G16_8", "G16_9", "G16_13", "G16_14", "G16_15"], ["All Channels", "Clean Longwave IR Window", "Dirty Longwave Window", "Dirty Longwave Window - CIRA", "False Color", "Infrared Longwave Window Band", "Mid-level Tropospheric Water Vapor", "Shortwave Window Band", "Upper-Level Tropospheric Water Vapor", "Channel 2", "Channel 7", "Channel 8", "Channel 9", "Channel 13", "Channel 14", "Channel 15"]]
 prereq_3 = []
 for imagepath1 in req_2_image_paths:
-    for pre in preprereq_3:
+    for pre in preprereq_3[0]:
         if pre in imagepath1:
             if pre not in prereq_3:
-                prereq_3.append(pre)
+                prereq_3.append(preprereq_3[1][preprereq_3[0].index(pre)])
                 break
 
 
 req_3 = st.sidebar.selectbox("Channel", prereq_3)
-if req_1 == "NWS" or req_1 == "Unknown":
+req_3_out = prereq_3[0][prereq_3[1].index(req_1)]
+if req_1_out == "NWS" or req_1 == "Unknown":
     prereq_4 = [""]
 else:
     prereq_4 = ["", "_map"]
@@ -137,7 +138,7 @@ filtered_image_paths = []
 for path in sorted_image_paths:
     if req_1_out in path:
         if req_2 in path:
-            if req_3 in path:
+            if req_3_out in path:
                 if req_4 == "":
                     if "_map" not in path:
                         filtered_image_paths.append(path)
