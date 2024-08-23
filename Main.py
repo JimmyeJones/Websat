@@ -99,7 +99,7 @@ prereq_3 = []
 for imagepath1 in req_2_image_paths:
     for pre in preprereq_3[0]:
         if pre in imagepath1:
-            if pre not in prereq_3:
+            if preprereq_3[1][preprereq_3[0].index(pre)] not in prereq_3:
                 prereq_3.append(preprereq_3[1][preprereq_3[0].index(pre)])
                 break
 
