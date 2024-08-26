@@ -62,14 +62,14 @@ req_1_out = prereq_1[0][prereq_1[1].index(req_1)]
 req_1_image_paths = [image86 for image86 in all_image_paths if req_1_out in image86]
 
 preprereq_2 = ["", "Full Disk", "Mesoscale 1", "Mesoscale 2"]
-prereq_2 = [pre for imagepath1 in req_1_image_paths for pre in preprereq_2 if pre in imagepath1 and pre not in prereq_2]
+prereq_2 = [pre for imagepath1 in req_1_image_paths for pre in preprereq_2 if pre in imagepath1]
 
 req_2 = st.sidebar.selectbox("Image Size", prereq_2)
 
 req_2_image_paths = [image86 for image86 in req_1_image_paths if req_2 in image86]
 
 preprereq_3 = [["", "_Clean_Longwave_IR_Window", "Dirty_Longwave_Window", "Dirty_Longwave_Window_-_CIRA", "GEO_False_Color", "Infrared_Longwave_Window_Band", "Mid-level_Tropospheric_Water_Vapor", "Shortwave_Window_Band", "Upper-Level_Tropospheric_Water_Vapor", "G16_2", "G16_7", "G16_8", "G16_9", "G16_13", "G16_14", "G16_15"], ["All Channels", "Clean Longwave IR Window", "Dirty Longwave Window", "Dirty Longwave Window - CIRA", "False Color", "Infrared Longwave Window Band", "Mid-level Tropospheric Water Vapor", "Shortwave Window Band", "Upper-Level Tropospheric Water Vapor", "Channel 2", "Channel 7", "Channel 8", "Channel 9", "Channel 13", "Channel 14", "Channel 15"]]
-prereq_3 = [preprereq_3[1][preprereq_3[0].index(pre)] for imagepath1 in req_2_image_paths for pre in preprereq_3[0] if pre in imagepath1 and preprereq_3[1][preprereq_3[0].index(pre)] not in prereq_3]
+prereq_3 = [preprereq_3[1][preprereq_3[0].index(pre)] for imagepath1 in req_2_image_paths for pre in preprereq_3[0] if pre in imagepath1]
 
 req_3 = st.sidebar.selectbox("Channel", prereq_3)
 req_3_out = preprereq_3[0][preprereq_3[1].index(req_3)]
