@@ -107,11 +107,11 @@ for imagepath1 in req_2_image_paths:
 req_3 = st.sidebar.selectbox("Channel", prereq_3)
 req_3_out = preprereq_3[0][preprereq_3[1].index(req_3)]
 if req_1_out == "NWS" or req_1 == "Unknown":
-    prereq_4 = ["All"]
+    prereq_4 = ["None"]
 else:
-    prereq_4 = ["All", "Map"]
+    prereq_4 = ["None", "Map"]
 req_4 = st.sidebar.selectbox("Overlay", prereq_4)
-if req_4 == "All":
+if req_4 == "None":
     req_4 = ""
 elif req_4 == "Map":
     req_4 = "_map"
