@@ -107,11 +107,14 @@ for imagepath1 in req_2_image_paths:
 req_3 = st.sidebar.selectbox("Channel", prereq_3)
 req_3_out = preprereq_3[0][preprereq_3[1].index(req_3)]
 if req_1_out == "NWS" or req_1 == "Unknown":
-    prereq_4 = [""]
+    prereq_4 = ["All"]
 else:
-    prereq_4 = ["", "_map"]
+    prereq_4 = ["All", "Map"]
 req_4 = st.sidebar.selectbox("Overlay", prereq_4)
-
+if req_4 == "All":
+    req_4 = ""
+elif req_4 == "Map":
+    req_4 = "_map"
 #Report a bug
 
 st.sidebar.link_button("Report a bug", "https://docs.google.com/forms/d/e/1FAIpQLSdHtg0td5xtoKiJftAAhd9x-T80IpTNn_cWLaxAHsNssbrVbw/viewform?usp=sf_link")
