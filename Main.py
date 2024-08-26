@@ -106,7 +106,7 @@ for imagepath1 in req_2_image_paths:
 
 req_3 = st.sidebar.selectbox("Channel", prereq_3)
 req_3_out = preprereq_3[0][preprereq_3[1].index(req_3)]
-if req_1_out == "NWS" or req_1 == "Unknown":
+if req_1_out == "NWS" or req_1_out == "Unknown":
     prereq_4 = ["None"]
 else:
     prereq_4 = ["None", "Map"]
