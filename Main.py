@@ -35,14 +35,14 @@ base_url = st.secrets["IP"]
 def get_image_paths():
     try:
         response = requests.get(f"{base_url}/images")
-        st.write(f"Response status code: {response.status_code}")
+        print(f"Response status code: {response.status_code}")
         if response.status_code == 200:
             return response.json()
         else:
-            st.write(f"Error: {response.text}")
+            print(f"Error: {response.text}")
             return []
     except Exception as e:
-        st.write(f"Exception: {e}")
+        print(f"Exception: {e}")
         return []
 
 # Function to extract datetime from path
@@ -58,9 +58,6 @@ all_image_paths = get_image_paths()
 
 
 
-
-# IP of Flask server
-base_url = st.secrets["IP"]
 
 st.title("WebSat")
 st.text("Satellite reception site")
@@ -176,9 +173,9 @@ if viewmode == "List view":
                         mime='image/jpeg'
                     )
             else:
-                st.write(f"Error loading preview: {response.status_code}")
+                print(f"Error loading preview: {response.status_code}")
         except Exception as e:
-            st.write(f"Exception loading preview: {e}")   
+            print(f"Exception loading preview: {e}")   
 
 elif viewmode == "Frame view":
     # Set up the stateful image index
@@ -219,8 +216,8 @@ elif viewmode == "Frame view":
                     mime='image/jpeg'
                 )
         else:
-            st.write(f"Error loading preview: {response.status_code}")
+            print(f"Error loading preview: {response.status_code}")
     except Exception as e:
-        st.write(f"Exception loading preview: {e}")
+        print(f"Exception loading preview: {e}")
 
 
