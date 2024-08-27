@@ -165,7 +165,7 @@ if viewmode == "List view":
                 image = Image.open(BytesIO(response.content))
                 st.image(image, caption=image_path, use_column_width=True)
                 images_shown += 1
-                if st.button(f"Load Download Button for {image_path}"):
+                if st.button(f"Load Download Button"):
                     st.download_button(
                         label="Download Full Resolution",
                         data=requests.get(full_url).content,
