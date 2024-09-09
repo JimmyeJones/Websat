@@ -118,7 +118,8 @@ st.sidebar.link_button("Report a bug", "https://docs.google.com/forms/d/e/1FAIpQ
 
 #contact me
 st.sidebar.link_button("Contact", "mailto:app.websat@gmail.com")
-
+#youtube
+st.sidebar.link_button("Youtube", "https://youtube.com/@websat_images?si=IwEJ9e8TmvDRd3sE")
 
 # Separate paths with valid dates and those without
 paths_with_dates = [path for path in all_image_paths if extract_datetime_from_path(path) is not None]
