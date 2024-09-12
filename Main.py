@@ -24,6 +24,11 @@ st.markdown(
 )
 #END OF PAGE SETUP
 
+#Notifications
+
+st.warning("Please note: The image decoder is experiencing issues. They will be fixed as soon as possible.")
+
+#end of notifications
 
 
 # IP of Flask server
