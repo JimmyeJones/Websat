@@ -26,7 +26,7 @@ st.markdown(
 
 #Notifications
 
-st.warning("Please note: The image decoder is experiencing issues. They will be fixed as soon as possible.")
+st.warning("Scheduled maintenance: 2-5PM EST September 15")
 
 #end of notifications
 
