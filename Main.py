@@ -26,7 +26,7 @@ st.markdown(
 
 #Notifications
 
-st.warning("Scheduled maintenance: 2-5PM EST September 15")
+st.warning("Scheduled maintenance: 2-5PM EST September 15 - maintenance will fix image decoder issues. The image viewer will be unresponsive.")
 
 #end of notifications
 
