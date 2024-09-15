@@ -26,7 +26,7 @@ st.markdown(
     
 #Notifications
 if True:
-    st.warning("Scheduled maintenance: 2-5PM EST - September 15\nPurpose: maintenance will fix image decoder issues.\nNote: The image viewer will be unresponsive during this time.")
+    st.warning("Scheduled maintenance: 2-5PM EST - September 15\nPurpose: maintenance will fix image decoder issues.")
     
     #end of notifications
     
