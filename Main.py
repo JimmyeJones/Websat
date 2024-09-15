@@ -25,7 +25,7 @@ st.markdown(
 #END OF PAGE SETUP
     
 #Notifications
-st.warning("Scheduled Maintenance: 2-5PM EST - September 15")
+st.warning("Scheduled Maintenance: 2-8PM EST - September 15")
 st.warning("Purpose: Maintenance will fix image decoder issues.")
 st.warning("Note: The image viewer will be unresponsive during this time.")
 #end of notifications
