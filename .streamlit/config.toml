@@ -1,6 +1,0 @@
-[theme]
-base = "dark"  # Optional: Adjust to "light" or "dark" based on your preference
-
-[server]
-enableGitHubBadge = false
-enableCORS = false
