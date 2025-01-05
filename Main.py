@@ -23,7 +23,7 @@ st.markdown(
 )
 
 # IP of Flask server (secondary storage server)
-base_url = st.secrets["SERVER_IP"]  # Use the public IP or domain of your secondary storage server
+base_url = st.secrets["IP"]  # Use the public IP or domain of your secondary storage server
 
 # Function to get all image paths
 def get_image_paths():
